@@ -1,0 +1,6 @@
+all:
+  hosts:
+    remote_servers:
+      ansible_ssh_host: 97.105.228.219
+      ansible_ssh_user: bpadmin
+      ansible_ssh_pass: "{{ ssh_pass }}"

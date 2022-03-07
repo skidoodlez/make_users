@@ -1,0 +1,22 @@
+---
+- name: Create user
+  hosts: remote_servers
+  remote_user: bpadmin
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  connection: ssh
+  vars: 
+       username : "{{ username }}"
+       password : ilovecharter123
+
+  tasks:
+   - name: Add user to remote server
+     user:
+       name: "{{ username }}"
+       comment: "User"
+       state: present
+
+   - name: Force user to change the password
+     command: 
+         chage -d 0 {{ username }}
