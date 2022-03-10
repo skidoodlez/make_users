@@ -6,7 +6,7 @@
   become_method: sudo
   gather_facts: no
   connection: ssh
-  vars: 
+  vars:
        username : "{{ username }}"
        password : ilovecharter123
 
@@ -18,5 +18,13 @@
        state: present
 
    - name: Force user to change the password
-     command: 
-         chage -d 0 {{ username }}
+     command: chage -d 0 {{ username }}
+
+   - name: Check if the user name was created
+     shell: grep {{ username }} /etc/passwd
+     register: output
+
+   - name: The user has been created
+     ansible.builtin.debug:
+      msg:
+      - "user {{ username }} created"
